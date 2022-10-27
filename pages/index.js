@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Input, useColorMode, Box, useColorModeValue, Center } from '@chakra-ui/react';
+import { Button, Flex, Heading, Input, useColorMode, Box, useColorModeValue, Center, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IoSunny, IoMoon } from 'react-icons/io5';
 import NextLink from "next/link"
@@ -9,6 +9,10 @@ const Home = () => {
 
   const formBackground = useColorModeValue("gray.100", "gray.700");
   const [toggle, setToggle] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
 
   return (
     <Flex height={"100vh"} alignItems={"center"} justifyContent={"center"}>
@@ -30,12 +34,22 @@ const Home = () => {
           mb={3}
           type="email"
         />
-        <Input
-          placeholder='********'
-          variant={"outline"}
-          type="password"
-          mb={6}
-        />
+        <InputGroup>
+          <Input
+            placeholder='********'
+            variant={"outline"}
+            type={show ? 'text' : 'password'}
+            onClick={handleClick}
+            mb={6}
+          />
+          <InputRightElement width='4.5rem'>
+            <Button h='1.75rem' size='sm' onClick={handleClick}>
+              {show ? 'Hide' : 'Show'}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+
+
 
         <Button colorScheme={"teal"}>Login</Button>
         <Center>
